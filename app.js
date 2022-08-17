@@ -1,21 +1,56 @@
-const swiper = new Swiper(".swiper", {
-  // Optional parameters
-  direction: "vertical",
-  loop: true,
+const primaryHeader = document.querySelector(".primary-header");
+const navToggle = document.querySelector(".mobile-nav-toggle");
+const primaryNav = document.querySelector(".primary-navigation");
 
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-  },
+const icon_Hamburger = document.querySelector(".icon-Hamburger");
+const icon_close = document.querySelector(".icon-close");
 
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
+navToggle.addEventListener("click", () => {
+  if (primaryNav.hasAttribute("data-visible")) {
+    navToggle.setAttribute("aria-expanded", false);
+    icon_Hamburger.style.display = "block";
+    icon_close.style.display = "none";
+  } else {
+    navToggle.setAttribute("aria-expanded", true);
+    icon_Hamburger.style.display = "none";
+    icon_close.style.display = "block";
+  }
 
-  // And if we need scrollbar
-  scrollbar: {
-    el: ".swiper-scrollbar",
-  },
+  primaryNav.toggleAttribute("data-visible");
+  primaryHeader.toggleAttribute("data-visible");
+});
+
+$(document).ready(function () {
+  $(".carousel").slick({
+    slidesToShow: 3,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    arrows: false,
+    mobileFirst: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 100,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
+  });
 });
